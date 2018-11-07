@@ -1,9 +1,9 @@
 # Use SVM to solve Adult Census problem
 
-1.[Project Description](#project)
-2.[Dataset Preprocessing and Interpretation](#preprocessing)
-3.[Linear Soft Margin SVM](#svm)
-4.[Performance](#performance)
+1. [Project Description](#project)
+2. [Dataset Preprocessing and Interpretation](#preprocessing)
+3. [Linear Soft Margin SVM](#svm)
+4. [Performance](#performance)
 
 
 <a name="project"></a>
