@@ -376,7 +376,7 @@ divide the discrete features into four parts (@unlimitediw):
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearDecisionBoundary.png)
 
 * Analysis:
-    * 10-fold-cross-validation can 
+    * In this problem I select age and 10-fold-cross-validation can 
 
 
 
