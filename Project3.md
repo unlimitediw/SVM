@@ -118,6 +118,13 @@ divide the discrete features into four parts (@unlimitediw):
                             for key in charTypeDic.keys():
                                 res -= len(charTypeDic[key])/m * self.calEntropy(charTypeDic[key])
                             return res
+             * Continuous feature preprocessing:
+                    
+                    # feature 2, 10, 11 are fnlwgt, capital gain and capital loss respectively
+                    X[2] //= 400
+                    X[10] //= 2000
+                    X[11] //= 2000
+                
              * Feature Information Gain Visulization and Selection:
                     
                     data = df.values
@@ -136,12 +143,16 @@ divide the discrete features into four parts (@unlimitediw):
                         # print(val)
                         pass
                         
-         * Explanation: 
+        * Explanation: 
             * For the first part: It return the information gain after slecting one feature with functions:
                 * E = -sum(p * log(p))
                     * ![](https://github.com/unlimitediw/SVM/blob/master/Image/EntropyCal.PNG)
                 * Gain = E - sum(featureP * featureE)
                     * ![](https://github.com/unlimitediw/SVM/blob/master/Image/InformationGain.PNG)
+            * For the second part: I use the class in first part to calculate the information gain for each feature, rank it and visualize it in next section.
+        * Visulization:
+            
+
 
                 
 <a name="svm"></a>
