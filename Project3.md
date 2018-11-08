@@ -14,7 +14,7 @@
 <a name="preprocessing"></a>
 ## Dataset preprocessing and interpretation
 There are three parts of preprocessing: data purify, dealing with discrete features and feature selection
-* ###Data purify: removing the rows with data containing '?'
+###Data purify: removing the rows with data containing '?'
 
    * coding:
     
