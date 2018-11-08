@@ -16,7 +16,7 @@
 There are two parts of preprocessing: data purify, feature selection
 * Data purify: removing the rows with data containing '?'
     coding:
-        ####
+    
         data = data[data.occupation != '?']
         keys = data.keys()
         for key in keys:
