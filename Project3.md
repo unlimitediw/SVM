@@ -16,15 +16,15 @@
 There are two parts of preprocessing: data purify, feature selection
 * Data purify: removing the rows with data containing '?'
 
-    coding:
+    * coding:
     
-        data = data[data.occupation != '?']
-        keys = data.keys()
-        for key in keys:
-            if data[key].dtype != 'int64':
-        data = data[data[key] != '?']
-    explanation:
-        -The datatype of 'data' is 'pandas.core.frame.DataFrame' which is a csv file readed pandas. Furthermore, it provide a 'vector operation: data = data[data.occupation == target]' which allow you to keep the target data without loop it manually. In this place, the target is the data not equal to '?'. 
+            data = data[data.occupation != '?']
+            keys = data.keys()
+            for key in keys:
+                if data[key].dtype != 'int64':
+            data = data[data[key] != '?']
+    * explanation:
+        The datatype of 'data' is 'pandas.core.frame.DataFrame' which is a csv file readed pandas. Furthermore, it provide a 'vector operation: data = data[data.occupation == target]' which allow you to keep the target data without loop it manually. In this place, the target is the data not equal to '?'. 
         
 
 
