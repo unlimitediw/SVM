@@ -71,12 +71,11 @@ divide the discrete features into four parts (@unlimitediw):
 
                     validateStart = foldTime * self.spiltLength
                     validateEnd = (foldTime + 1) * self.spiltLength
-                    trainX = self.X[0:validateStart] + self.X[validateEnd:]
-                    trainY = self.Y[0:validateStart] + self.Y[validateEnd:]
+                    trainX = np.concatenate((self.X[:validateStart], self.X[validateEnd:]))
+                    trainY = np.concatenate((self.Y[:validateStart], self.Y[validateEnd:]))
                     validateX = self.X[validateStart:validateEnd]
                     validateY = self.Y[validateStart:validateEnd]
                     return trainX, trainY, validateX, validateY
-
     * Explanation:
     
         It is basically the same as 'sklearn.model_selection.KFold' but I put the data and label address inside of the class rather than just return the index outside which I believe that it will be more clear to usage. Furthermore, I don't let the KFold class to do preprocessing of spilt because it is memory cost for large size of data.
@@ -325,8 +324,48 @@ divide the discrete features into four parts (@unlimitediw):
                         else:
                             passes = 0
 
+    * validate the svm model with 10-fold-cross-validation 
+        * part of model and prediction accuracy generation:
+        
+                dataset = KF.KFold(X, Y)
+                totalAccuracy = 0
+                for i in range(10):
+                    trainX, trainY, validateX, validateY = dataset.spilt(i)
+                    C = 0.3
+                    SVM_SAMPLE = SH.SVM_HAND(C, trainX, trainY, tolerance=0.1, kernel='rbf')
+                    localAccuracy = validate(validateX, validateY, SVM_SAMPLE)
+                    print("local Accuracy for", i, "time:", format(localAccuracy, '.3f'))
+                    totalAccuracy += localAccuracy
+                totalAccuracy /= 10
+                print(format(totalAccuracy, '.3f'))
 
+                plotData()
+                plotBoundary(SVM_SAMPLE, 0, 100, 0, 20)
+                
+        * part of 10-fold-cross-validation:
+        
+                class KFold(object):
+                    def __init__(self, X, Y, foldTotal=10):
+                        self.X = X
+                        self.Y = Y
+                        self.foldTotal = foldTotal
+                        self.spiltLength = len(self.Y) // foldTotal
 
+                    def spilt(self, foldTime):
+                        '''
+                        It will be a little not well distributed because there is a remain for len(self.Y) // foldTotal.
+                        But the remain will smaller than foldTotal and does not matter comparing with the large training set.
+                        :param foldTime: the counter of spilt operation
+                        :return: training data of input and label, validating
+                        '''
+
+                        validateStart = foldTime * self.spiltLength
+                        validateEnd = (foldTime + 1) * self.spiltLength
+                        trainX = np.concatenate((self.X[:validateStart], self.X[validateEnd:]))
+                        trainY = np.concatenate((self.Y[:validateStart], self.Y[validateEnd:]))
+                        validateX = self.X[validateStart:validateEnd]
+                        validateY = self.Y[validateStart:validateEnd]
+                        return trainX, trainY, validateX, validateY
 
 
 <a name="performance"></a>
