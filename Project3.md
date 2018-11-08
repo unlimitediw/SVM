@@ -157,7 +157,7 @@ divide the discrete features into four parts (@unlimitediw):
             * Highest Information gain feature:
                 * ![](https://github.com/unlimitediw/SVM/blob/master/Image/dataplotRelationMarried.png)
             * Education and Age data plot:
-                * ![](https://github.com/unlimitediw/SVM/blob/master/Image/EDUAGE)
+                * ![](https://github.com/unlimitediw/SVM/blob/master/Image/eduandAge.png)
 
         * Analysis:
             * If we simply applied information gain calculator to these features, the continuous datatype features of 'fnlwgt' and the discrete datatype 'relationship' will be the two feature with highest information gain which are 0.5806 and 0.1662. 
