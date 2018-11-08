@@ -51,6 +51,34 @@ divide the discrete features into four parts (@unlimitediw):
          * marital status
          * workclass
 
+* Spilt the dataset for stratified 10-fold-cross validation.
+    * coding:
+    
+            class KFold(object):
+                def __init__(self,X,Y,foldTotal = 10):
+                    self.X = X
+                    self.Y = Y
+                    self.foldTotal = foldTotal
+                    self.spiltLength = len(self.Y) // foldTotal
+
+                def spilt(self, foldTime):
+                    '''
+                    It will be a little not well distributed because there is a remain for len(self.Y) // foldTotal.
+                    But the remain will smaller than foldTotal and does not matter comparing with the large training set.
+                    :param foldTime: 
+                    :return: 
+                    '''
+                    testStart = foldTime * self.spiltLength
+                    testEnd = (foldTime + 1) * self.spiltLength
+                    trainX = self.X[0:testStart] + self.X[testEnd:]
+                    trainY = self.Y[0:testStart] + self.Y[testEnd:]
+                    testX = self.X[testStart:testEnd]
+                    testY = self.Y[testStart:testEnd]
+                    return trainX,trainY,testX,testY
+    * Explanation:
+    
+        It is basically the same as 'sklearn.model_selection.KFold' but I put the data and label address inside of the class rather than just return the index outside which I believe that it will be more clear to usage. Furthermore, I don't let the KFold class to do preprocessing of spilt because it is memory cost for large size of data.
+
 
 <a name="svm"></a>
 ## Linear Soft Margin SVM
