@@ -18,11 +18,11 @@ There are three parts of preprocessing: data purify, dealing with discrete featu
 
    * coding:
     
-         data = data[data.occupation != '?']
-         keys = data.keys()
-         for key in keys:
-             if data[key].dtype != 'int64':
-         data = data[data[key] != '?']
+             data = data[data.occupation != '?']
+             keys = data.keys()
+             for key in keys:
+                 if data[key].dtype != 'int64':
+             data = data[data[key] != '?']
    * explanation:
       * The datatype of 'data' is 'pandas.core.frame.DataFrame' which is a csv file readed pandas. Furthermore, it provide a 'vector operation: data = data[data.occupation == target]' which allow you to keep the target data without loop it manually. In this place, the target is the data not equal to '?'. 
 
@@ -81,7 +81,42 @@ divide the discrete features into four parts (@unlimitediw):
     
         It is basically the same as 'sklearn.model_selection.KFold' but I put the data and label address inside of the class rather than just return the index outside which I believe that it will be more clear to usage. Furthermore, I don't let the KFold class to do preprocessing of spilt because it is memory cost for large size of data.
 
+* Feature Analysis and Selection:
+    * Feature unify: As previous section explained, I converted all discrete feature to continuous feature or basic boolean feature with 1 and -1 as input. Furhtermore, I will do the information gain calculation to select data first rather than normalization.
+    * Information Gain ranking: 
+        * coding:
+        
+                class EntropyGainHelper(object):
+                    def __init__(self,Y):
+                        self.Entropy = self.calEntropy(Y)
 
+                    def calEntropy(self, Y):
+                        m = len(Y)
+                        typeDic = {}
+                        for elem in Y:
+                            if elem not in typeDic:
+                                typeDic[elem] = 1
+                            else:
+                                typeDic[elem] += 1
+                        res = 0
+                        for key in typeDic.keys():
+                            res -= typeDic[key] / m * math.log2(typeDic[key] / m)
+                        return res
+
+                    # attention: input X should be transformed to X.T previously
+                    # then C = X[i]
+                    def calEG(self, C, Y):
+                        charTypeDic = {}
+                        m = len(Y)
+                        res = self.Entropy
+                        for i in range(m):
+                            if C[i] not in charTypeDic:
+                                charTypeDic[C[i]] = [Y[i]]
+                            else:
+                                charTypeDic[C[i]].append(Y[i])
+                        for key in charTypeDic.keys():
+                            res -= len(charTypeDic[key])/m * self.calEntropy(charTypeDic[key])
+                        return res                
 <a name="svm"></a>
 ## Linear Soft Margin SVM
 
