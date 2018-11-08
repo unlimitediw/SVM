@@ -136,8 +136,9 @@ divide the discrete features into four parts (@unlimitediw):
                         # print(val)
                         pass
          * Explanation: 
-            * For the first part: It return the information gain after slecting one feature with H
+            * For the first part: It return the information gain after slecting one feature with functions:
                 ![](https://github.com/unlimitediw/SVM/blob/master/Image/EntropyCal.PNG)
+                
 <a name="svm"></a>
 ## Linear Soft Margin SVM
 
