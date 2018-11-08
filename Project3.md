@@ -370,6 +370,8 @@ divide the discrete features into four parts (@unlimitediw):
 * Result:
     * Accuracy:
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/10CrossValidationResult.png)
+    * Support Vectors:
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/SupportVectors.png)
     * Decision Boundary:
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/DecisionBoundary.png)
 
