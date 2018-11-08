@@ -54,28 +54,28 @@ divide the discrete features into four parts (@unlimitediw):
 * Spilt the dataset for stratified 10-fold-cross validation.
     * coding:
     
-          class KFold(object):
-              def __init__(self, X, Y, foldTotal=10):
-                  self.X = X
-                  self.Y = Y
-                  self.foldTotal = foldTotal
-                  self.spiltLength = len(self.Y) // foldTotal
+            class KFold(object):
+                def __init__(self, X, Y, foldTotal=10):
+                    self.X = X
+                    self.Y = Y
+                    self.foldTotal = foldTotal
+                    self.spiltLength = len(self.Y) // foldTotal
 
-              def spilt(self, foldTime):
-                  '''
-                  It will be a little not well distributed because there is a remain for len(self.Y) // foldTotal.
-                  But the remain will smaller than foldTotal and does not matter comparing with the large training set.
-                  :param foldTime: the counter of spilt operation
-                  :return: training data of input and label, validating
-                  '''
+                def spilt(self, foldTime):
+                    '''
+                    It will be a little not well distributed because there is a remain for len(self.Y) // foldTotal.
+                    But the remain will smaller than foldTotal and does not matter comparing with the large training set.
+                    :param foldTime: the counter of spilt operation
+                    :return: training data of input and label, validating
+                    '''
 
-                  validateStart = foldTime * self.spiltLength
-                  validateEnd = (foldTime + 1) * self.spiltLength
-                  trainX = self.X[0:validateStart] + self.X[validateEnd:]
-                  trainY = self.Y[0:validateStart] + self.Y[validateEnd:]
-                  validateX = self.X[validateStart:validateEnd]
-                  validateY = self.Y[validateStart:validateEnd]
-                  return trainX, trainY, validateX, validateY
+                    validateStart = foldTime * self.spiltLength
+                    validateEnd = (foldTime + 1) * self.spiltLength
+                    trainX = self.X[0:validateStart] + self.X[validateEnd:]
+                    trainY = self.Y[0:validateStart] + self.Y[validateEnd:]
+                    validateX = self.X[validateStart:validateEnd]
+                    validateY = self.Y[validateStart:validateEnd]
+                    return trainX, trainY, validateX, validateY
 
     * Explanation:
     
