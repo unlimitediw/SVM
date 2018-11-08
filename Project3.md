@@ -154,11 +154,14 @@ divide the discrete features into four parts (@unlimitediw):
             * Information Gain Ranking （After converting continuous data to discrete data):
                 * ![](https://github.com/unlimitediw/SVM/blob/master/Image/IGRank.png)
                 
+            * Highest Information gain feature:
+                * ![](https://github.com/unlimitediw/SVM/blob/master/Image/dataplotRelationMarried.png)
             * Education and Age data plot:
                 * ![](https://github.com/unlimitediw/SVM/blob/master/Image/EDUAGE)
 
         * Analysis:
             * If we simply applied information gain calculator to these features, the continuous datatype features of 'fnlwgt' and the discrete datatype 'relationship' will be the two feature with highest information gain which are 0.5806 and 0.1662. 
+            * The highest discrete two information gain features are "relationship" and "married status". Nevertheless, there is no too much correlation inside the classes of it and we need to do PCA and specify scalar with these classification features. Thus, I use the more conrete features with high information gain: "age" and "education num"
             * However, we should not use continuous datatype to our information gain model because in feature selection, the entropy is not calculated on the actual attributes, but on the class label. If you wanted to find the entropy of a continuous variable, you could use Differential entropy metrics such as KL divergence, but that's not the point about feature selection. [reference](https://datascience.stackexchange.com/questions/24876/how-can-i-compute-information-gain-for-continuous-valued-attributes)
             * Secondly, I do not selection the discrete feature 'relationship' because as I metion previously, there is not too much correlation inside of the classes of the feature and is not appropriate to SVM model.
             * Finally, the two features age and educationNum with entropy gain of 0.0975 and 0.0934 repspectively are the highest information gain features after removing the continuous features of 'fnlwgt', 'captial gain' and no correlated feature 'relationship' and 'marital status'
