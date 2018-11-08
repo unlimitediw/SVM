@@ -205,7 +205,6 @@ divide the discrete features into four parts (@unlimitediw):
                     result = np.sum(self.alpha * self.YSample * kernel) + self.b
                     return 1 if result >= 0 else -1
 
-                # function 1
                 def Hypo(self, x):
                     '''
                     :param alpha: the alpha i weight for sample point
