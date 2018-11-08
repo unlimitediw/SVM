@@ -164,6 +164,7 @@ divide the discrete features into four parts (@unlimitediw):
             * Secondly, I do not selection the discrete feature 'relationship' because as I metion previously, there is not too much correlation inside of the classes of the feature and is not appropriate to SVM model.
             * Finally, the two features age and educationNum with entropy gain of 0.0975 and 0.0934 repspectively are the highest information gain features after removing the continuous features of 'fnlwgt', 'captial gain' and no correlated feature 'relationship' and 'marital status'
                 
+            
 <a name="svm"></a>
 ## Linear Soft Margin SVM
 
