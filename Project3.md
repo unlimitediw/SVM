@@ -369,12 +369,14 @@ divide the discrete features into four parts (@unlimitediw):
 
 * Result:
     * Accuracy:
-        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/10CrossValidationResult.png)
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearValidateAcc.png)
     * Support Vectors:
-        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/SupportVectors.png)
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearSupportVectors.png)
     * Decision Boundary:
-        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/DecisionBoundary.png)
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearDecisionBoundary.png)
 
+* Analysis:
+    * 10-fold-cross-validation can 
 
 
 
