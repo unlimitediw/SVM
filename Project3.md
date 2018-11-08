@@ -139,8 +139,10 @@ divide the discrete features into four parts (@unlimitediw):
          * Explanation: 
             * For the first part: It return the information gain after slecting one feature with functions:
                 * E = -sum(p * log(p))
+                
                         ![](https://github.com/unlimitediw/SVM/blob/master/Image/EntropyCal.PNG)
                 * Gain = E - sum(featureP * featureE)
+                
                         ![](https://github.com/unlimitediw/SVM/blob/master/Image/InformationGain.PNG)
 
                 
