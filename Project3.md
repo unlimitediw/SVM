@@ -155,11 +155,11 @@ divide the discrete features into four parts (@unlimitediw):
             * Information Gain Ranking:
                 * ![](https://github.com/unlimitediw/SVM/blob/master/Image/IGRank.png)
                 
-            * Education and Age data plot
+            * Education and Age data plot:
                 * ![](https://github.com/unlimitediw/SVM/blob/master/Image/EDUAGE)
 
-
-                
+            * Analysis:
+                * If we simply applied information gain calculator to these features, the continuous datatype features of 'fnlwgt' and the discrete datatype 'relationship' will be the two feature with highest information gain which are 0.5806 and 0.1662. However, we should not use continuous datatype to our information gain model because in decision trees, the entropy is not calculated on the actual attributes, but on the class label. If you wanted to find the entropy of a continuous variable, you could use Differential entropy metrics such as KL divergence, but that's not the point about decision trees.[link](https://datascience.stackexchange.com/questions/24876/how-can-i-compute-information-gain-for-continuous-valued-attributes)
 <a name="svm"></a>
 ## Linear Soft Margin SVM
 
