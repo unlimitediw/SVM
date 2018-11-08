@@ -152,7 +152,7 @@ divide the discrete features into four parts (@unlimitediw):
             * For the second part: Apart from discrete data, continuous data also need preprocessing to get the information gain. Instead of use the knowledge of integral, I simply convert it to discrete data for the convenient of information gain calculation.
             * For the third part: I use the class in first part to calculate the information gain for each feature, rank it and visualize it in next section.
         * Visulization:
-            * Information Gain Ranking:
+            * Information Gain Ranking （After converting continuous data to discrete data):
                 * ![](https://github.com/unlimitediw/SVM/blob/master/Image/IGRank.png)
                 
             * Education and Age data plot:
@@ -166,8 +166,9 @@ divide the discrete features into four parts (@unlimitediw):
                 
             
 <a name="svm"></a>
-## Linear Soft Margin SVM
-
+## Linear Soft Margin SVM and Kernel SVM
+    * Before showing my validation result and decision boundary I want to display my handwork coding for my svm training model, linear svm trainer, kernel svm trainer with some kernel functions and smo algorithm inside.
+    
 
 
 
