@@ -167,7 +167,7 @@ divide the discrete features into four parts (@unlimitediw):
             
 <a name="svm"></a>
 ## Linear Soft Margin SVM and Kernel SVM
-    * Before showing my validation result and decision boundary I want to display my handwork coding for my svm training model, linear svm trainer, kernel svm trainer with some kernel functions and smo algorithm inside.
+* Before showing my validation result and decision boundary I want to display my handwork coding for my svm training model, linear svm trainer, kernel svm trainer with some kernel functions and smo algorithm inside.
     
 
 
