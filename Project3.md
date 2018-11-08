@@ -369,17 +369,9 @@ divide the discrete features into four parts (@unlimitediw):
 
 * Result:
     * Accuracy:
-        local Accuracy for 0 time: 0.722
-        local Accuracy for 1 time: 0.822
-        local Accuracy for 2 time: 0.756
-        local Accuracy for 3 time: 0.767
-        local Accuracy for 4 time: 0.689
-        local Accuracy for 5 time: 0.867
-        local Accuracy for 6 time: 0.800
-        local Accuracy for 7 time: 0.822
-        local Accuracy for 8 time: 0.756
-        local Accuracy for 9 time: 0.789
-        0.779
+        ![](https://github.com/unlimitediw/SVM/blob/master/Image/10CrossValidationResult.png)
+    * Decision Boundary:
+        ![](https://github.com/unlimitediw/SVM/blob/master/Image/DCBoundary.png)
 
 
 
