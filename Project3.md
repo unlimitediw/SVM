@@ -85,38 +85,57 @@ divide the discrete features into four parts (@unlimitediw):
     * Feature unify: As previous section explained, I converted all discrete feature to continuous feature or basic boolean feature with 1 and -1 as input. Furhtermore, I will do the information gain calculation to select data first rather than normalization.
     * Information Gain ranking: 
         * coding:
-        
-                class EntropyGainHelper(object):
-                    def __init__(self,Y):
-                        self.Entropy = self.calEntropy(Y)
+            * Information Gain Calculator:
+          
+                    class EntropyGainHelper(object):
+                        def __init__(self,Y):
+                            self.Entropy = self.calEntropy(Y)
 
-                    def calEntropy(self, Y):
-                        m = len(Y)
-                        typeDic = {}
-                        for elem in Y:
-                            if elem not in typeDic:
-                                typeDic[elem] = 1
-                            else:
-                                typeDic[elem] += 1
-                        res = 0
-                        for key in typeDic.keys():
-                            res -= typeDic[key] / m * math.log2(typeDic[key] / m)
-                        return res
+                        def calEntropy(self, Y):
+                            m = len(Y)
+                            typeDic = {}
+                            for elem in Y:
+                                if elem not in typeDic:
+                                    typeDic[elem] = 1
+                                else:
+                                    typeDic[elem] += 1
+                            res = 0
+                            for key in typeDic.keys():
+                                res -= typeDic[key] / m * math.log2(typeDic[key] / m)
+                            return res
 
-                    # attention: input X should be transformed to X.T previously
-                    # then C = X[i]
-                    def calEG(self, C, Y):
-                        charTypeDic = {}
-                        m = len(Y)
-                        res = self.Entropy
-                        for i in range(m):
-                            if C[i] not in charTypeDic:
-                                charTypeDic[C[i]] = [Y[i]]
-                            else:
-                                charTypeDic[C[i]].append(Y[i])
-                        for key in charTypeDic.keys():
-                            res -= len(charTypeDic[key])/m * self.calEntropy(charTypeDic[key])
-                        return res                
+                        # attention: input X should be transformed to X.T previously
+                        # then C = X[i]
+                        def calEG(self, C, Y):
+                            charTypeDic = {}
+                            m = len(Y)
+                            res = self.Entropy
+                            for i in range(m):
+                                if C[i] not in charTypeDic:
+                                    charTypeDic[C[i]] = [Y[i]]
+                                else:
+                                    charTypeDic[C[i]].append(Y[i])
+                            for key in charTypeDic.keys():
+                                res -= len(charTypeDic[key])/m * self.calEntropy(charTypeDic[key])
+                            return res
+             * Feature Information Gain Visulization and Selection:
+                    
+                    data = df.values
+                    # character selection
+                    Ecal = EntropyGainGenerator.EntropyGainHelper(Y)
+                    charaNameList = ['age', 'workclass', 'fnlwgt', 'education', 'educationNum', 'marital status', 'occupation',
+                                     'relationship', 'race', 'sex', 'capital gain', 'capital loss', 'hours.per.week', 'native country']
+                    charaEGDic = {}
+                    for i in range(len(X)):
+                        charaEGDic[charaNameList[i]] = Ecal.calEG(X[i], Y)
+                    sort_key = sorted(charaEGDic, key=lambda x: charaEGDic[x])[::-1]
+                    rankingEG = []
+                    for key in sort_key:
+                        rankingEG.append((key, charaEGDic[key]))
+                    for val in rankingEG:
+                        # print(val)
+                        pass
+
 <a name="svm"></a>
 ## Linear Soft Margin SVM
 
