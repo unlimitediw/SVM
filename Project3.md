@@ -149,7 +149,8 @@ divide the discrete features into four parts (@unlimitediw):
                     * ![](https://github.com/unlimitediw/SVM/blob/master/Image/EntropyCal.PNG)
                 * Gain = E - sum(featureP * featureE)
                     * ![](https://github.com/unlimitediw/SVM/blob/master/Image/InformationGain.PNG)
-            * For the second part: I use the class in first part to calculate the information gain for each feature, rank it and visualize it in next section.
+            * For the second part: Apart from discrete data, continuous data also need preprocessing to get the information gain. Instead of use the knowledge of integral, I simply convert it to discrete data for the convenient of information gain calculation.
+            * For the third part: I use the class in first part to calculate the information gain for each feature, rank it and visualize it in next section.
         * Visulization:
             
 
