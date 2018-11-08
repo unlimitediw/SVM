@@ -370,7 +370,7 @@ divide the discrete features into four parts (@unlimitediw):
                         validateY = self.Y[validateStart:validateEnd]
                         return trainX, trainY, validateX, validateY
 
-* Result:
+* Result and Analysis:
     * Accuracy:
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearValidateAcc.png)
     * Support Vectors:
@@ -378,8 +378,23 @@ divide the discrete features into four parts (@unlimitediw):
     * Decision Boundary:
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearDecisionBoundary.png)
 
-* Analysis:
-    * In this problem I select age and 10-fold-cross-validation can 
+    * In this problem I select age and education num to make the visualization more intuitionistic and use 10-fold validation and data ramdomlize to relieve the overfitting problem.
+    
+* Change C and evaluate model:
+    * Relationship between C and SVM performance:
+        * SVM perfomance relationship with C value in linear svm model is really not obvious. Generally speaking, though, Larger C means the SVM model will be more strict and has less error point. However, the C value will only affect the performance in this model slightly.
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/Crelationship.png)
+        
+    * decision boudary with smaller C 0.01:
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearCp01.png)
+    * decision boudary with medium C 1:
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearC1.png)
+    * decision boundary with larger C 3:
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearCp03.png)
+    
+
+* Train SVM using all features:
+    * part 1: More about feature preprocessing: For the calssification type feature, I want to use one hard coding to define the discrete features. 
 
 
 
