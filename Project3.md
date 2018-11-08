@@ -27,31 +27,29 @@ There are three parts of preprocessing: data purify, dealing with discrete featu
       * The datatype of 'data' is 'pandas.core.frame.DataFrame' which is a csv file readed pandas. Furthermore, it provide a 'vector operation: data = data[data.occupation == target]' which allow you to keep the target data without loop it manually. In this place, the target is the data not equal to '?'. 
 
 * Dealing with discrete features:
-   
-   * Strategy: 
-      1. divide the discrete features into four parts (@unlimitediw):
-         1. correlated feature: the feature which has some correlation in it's values. For instance, to the feature 'education', it is obviously that Preschool < Doctorate and so on.              
-            * treatment: to the well-distributed integer clssificated feature, we can diretly used it as a input feature with normalization while to the high correlated data such as the education, we can convert it to well-distributed integer classified feature 'education num' in a proper weighted way.
-            * inside classification:
-               * age
-               * education
-               * education num
-               * hours.per.week
-         2. independent feature: the feature which has no relationship in it's values such as the native country
-            * treatment: Although we can not find the correlation inside of it directly, we can first do the clustering depends on the class relation with label. Forexample: to the occupation, we calculate the percentage of '>50k' of each class of occupation and rank it. After that, create a new boolean feature that takes the left half as strong occupation and the right half as the weak occupation.
-            * inside classification:
-               * native country
-               * race
-               * occupation
-         3. boolean feature: these kind of data is the most basic one, we don't need to do any treatment with it.
-            * treatment: It is the most basic feature and we can just set the true as 1 and false as -1 and take it as input feature.
-            * inside classification:
-               * sex
-         4. compound feature: some feature is very hard to find the relation inside of it. May be some parts of it are correlated but other are not and the classification of this feature is not well-distributed.
-            * treatment: Someway same as the independent features. However, there may some different since it still has some correlation inside some of it's feature classes and we may deploy the data unequally with more heuristic instruction. For instance, we can rank the feature classes based on percentage of '>=50k' and average the feature classes with transistion stats such as married divorce because it is close.
-            * inside classification:
-               * marital status
-               * workclass
+    1. divide the discrete features into four parts (@unlimitediw):
+       1. correlated feature: the feature which has some correlation in it's values. For instance, to the feature 'education', it is obviously that Preschool < Doctorate and so on.              
+          * treatment: to the well-distributed integer clssificated feature, we can diretly used it as a input feature with normalization while to the high correlated data such as the education, we can convert it to well-distributed integer classified feature 'education num' in a proper weighted way.
+          * inside classification:
+             * age
+             * education
+             * education num
+             * hours.per.week
+       2. independent feature: the feature which has no relationship in it's values such as the native country
+          * treatment: Although we can not find the correlation inside of it directly, we can first do the clustering depends on the class relation with label. Forexample: to the occupation, we calculate the percentage of '>50k' of each class of occupation and rank it. After that, create a new boolean feature that takes the left half as strong occupation and the right half as the weak occupation.
+          * inside classification:
+             * native country
+             * race
+             * occupation
+       3. boolean feature: these kind of data is the most basic one, we don't need to do any treatment with it.
+          * treatment: It is the most basic feature and we can just set the true as 1 and false as -1 and take it as input feature.
+          * inside classification:
+             * sex
+       4. compound feature: some feature is very hard to find the relation inside of it. May be some parts of it are correlated but other are not and the classification of this feature is not well-distributed.
+          * treatment: Someway same as the independent features. However, there may some different since it still has some correlation inside some of it's feature classes and we may deploy the data unequally with more heuristic instruction. For instance, we can rank the feature classes based on percentage of '>=50k' and average the feature classes with transistion stats such as married divorce because it is close.
+          * inside classification:
+             * marital status
+             * workclass
 
 
 <a name="svm"></a>
