@@ -46,7 +46,7 @@ divide the discrete features into four parts (@unlimitediw):
       * inside classification:
          * sex
   4. Compound Feature: some feature is very hard to find the relation inside of it. May be some parts of it are correlated but other are not and the classification of this feature is not well-distributed.
-      * treatment: Someway same as the independent features. However, there may some different since it still has some correlation inside some of it's feature classes and we may deploy the data unequally with more heuristic instruction. For instance, we can rank the feature classes based on percentage of '>=50k' and average the feature classes with transistion stats such as married divorce because it is close.
+      * treatment: Someway same as the independent features. However, there may some different since it still has some correlation inside some of it's feature classes and we may deploy the data unequally with more heuristic instruction. For instance, we can rank the feature classes based on percentage of '>=50k' and average the feature classes with transistion statUs such as 'Married-spouse-absent' and 'Married-civ-spouse' because it is too close.
       * inside classification:
          * marital status
          * workclass
