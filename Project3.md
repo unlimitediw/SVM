@@ -154,6 +154,9 @@ divide the discrete features into four parts (@unlimitediw):
         * Visulization:
             * Information Gain Ranking:
                 * ![](https://github.com/unlimitediw/SVM/blob/master/Image/IGRank.png)
+                
+            * Education and Age data plot
+                * ![](https://github.com/unlimitediw/SVM/blob/master/Image/EDUAGE)
 
 
                 
