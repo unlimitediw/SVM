@@ -22,7 +22,7 @@ There are two parts of preprocessing: data purify, feature selection
         for key in keys:
             if data[key].dtype != 'int64':
         data = data[data[key] != '?']
-        ####
+        
 
 
 <a name="svm"></a>
