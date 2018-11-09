@@ -394,7 +394,12 @@ divide the discrete features into four parts (@unlimitediw):
     
 
 * Train SVM using all features:
-    * part 1: More about feature preprocessing: For the calssification type feature, I want to use one hard coding to define the discrete features. 
+    * part 1: More about feature preprocessing: For the calssification type feature, I want to use one hard coding to define the discrete features. However, in this project, more features is still a disaster so I can only a little bunch of data and some important features to train and test. Furthermore, for some features that have similarity I will aggregate it and simply flatten the classification data such as marital status into a series of boolean features such as Speparted[0,1], Never-married[0,1].
+        * e.g
+            
+            Xnames = ['age','education num','hours','capital gain','capital loss','fnlwgt','sex','married']
+            X = [33,5,40,0,0,132870,1,0]
+    * part 2: I will also do the feature normalization with Standardization since the range of values of raw data varies widely such as capital gain. The range of all features should be normalized so that each feature contributes approximately proportionately to the final distance.
 
 
 
