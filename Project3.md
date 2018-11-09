@@ -422,40 +422,45 @@ divide the discrete features into four parts (@unlimitediw):
 <a name="performance"></a>
 ## Kernel SVM and Performance imporving
 * Performance Comparision for different kernel:
+    * Attention: '>=50k' is positive in my model.
     * Linear Kernel:
         ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearDecisionBoundary.png)
-        * True Positive: 
-        * FalsePositive:
-        * TrueNegative:
-        * FalseNegative:
+        * C value: 0.01
+        * True Positive: 87
+        * FalsePositive: 48
+        * TrueNegative: 547
+        * FalseNegative: 132
         
-        * Accuracy:
-        * Precision:
-        * Recall:
-        * F1-Score:
-        * Variance:
+        * Accuracy: 0.78
+        * Precision: 0.64
+        * Recall: 0.40
+        * F1-Score: 0.49 
+        * Variance: 412924.5
         * (Sorry I can not understant what variance needed in this project So I used the variance of (TP,FP,TN,FN) at this place and will explain other variance to Grader if needed later)
     * RBF Kernel:
         ![](https://github.com/unlimitediw/SVM/blob/master/Image/DecisionBoundary.png)
-        * True Positive: 
-        * FalsePositive:
-        * TrueNegative:
-        * FalseNegative:
+        * C value: 0.5
+        * True Positive: 101
+        * FalsePositive: 41
+        * TrueNegative: 554
+        * FalseNegative: 118
         
-        * Accuracy:
-        * Precision:
-        * Recall:
-        * F1-Score:
-        * Variance:
+        * Accuracy: 0.81
+        * Precision: 0.71
+        * Recall: 0.46
+        * F1-Score: 0.56
+        * Variance: 414478.5
+        
     * Polynomial Kernel
         ![](https://github.com/unlimitediw/SVM/blob/master/Image/PolynomialBoundary.png)
-        * True Positive: 
-        * FalsePositive:
-        * TrueNegative:
-        * FalseNegative:
+        * C value: 0.000001
+        * True Positive: 90
+        * FalsePositive: 50
+        * TrueNegative: 545
+        * FalseNegative: 129
         
-        * Accuracy:
-        * Precision:
-        * Recall:
-        * F1-Score:
-        * Variance:
+        * Accuracy: 0.78
+        * Precision: 0.64
+        * Recall: 0.41
+        * F1-Score: 0.50
+        * Variance: 412364.5
