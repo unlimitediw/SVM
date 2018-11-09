@@ -678,7 +678,7 @@ divide the discrete features into four parts (@unlimitediw):
     * svm
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/SV%2C.png)
     * logistic regression(with perceptron)
-        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/SV%2C.png)
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/perceptron.png)
 
 * Performance Evaluation:
     * 'rbf' kernel soft svm:
