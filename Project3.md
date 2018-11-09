@@ -11,6 +11,8 @@
 
 * In this exercise, I implement my own linear soft SVM with rbf, linear and polynomial kernel to solve the Adult Census Income problem. I first do the data preprocessing to abandon the rows containing '?' and select the features with highest priority as model input features. After that, I design and train my linear soft SVM model with different kernels and validate it by 10-fold-cross validation while visualize it like drawing boundary at the same time. In the model training process I also compare the performance of my model with different kernels, different hyperparameters such as 'C', 'sigma', 'tolerance' and so on. At the end. I also add the bagging methods to improve my svm model and evaluate a boosting methods to compare with svm to compare with the svm model. I finally using learning curves to show the performance for different methods.
 
+* '>= 50k' is the same meaning as '>50k' in my project.
+
 <a name="preprocessing"></a>
 ## Dataset preprocessing and interpretation
 There are three parts of preprocessing: data purify, dealing with discrete features and feature selection
