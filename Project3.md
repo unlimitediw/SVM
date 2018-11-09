@@ -36,7 +36,9 @@ divide the discrete features into four parts (@unlimitediw):
          * education num
          * hours.per.week
   2. Independent Feature: the feature which has no relationship in it's values such as the native country
-      * treatment: Although we can not find the correlation inside of it directly, we can first do the clustering depends on the class relation with label. Forexample: to the occupation, we calculate the percentage of '>50k' of each class of occupation and rank it. After that, create a new boolean feature that takes the left half as strong occupation and the right half as the weak occupation.
+      * treatment: 
+        * It is possible to use some techinque of PCA and One hard coding to evaluate these classification features or just turn it to boolean data type.
+        * Although we can not find the correlation inside of it directly, we can first do the clustering depends on the class relation with label. Forexample: to the occupation, we calculate the percentage of '>50k' of each class of occupation and rank it. After that, create a new boolean feature that takes the left half as strong occupation and the right half as the weak occupation.
       * inside classification:
          * native country
          * race
