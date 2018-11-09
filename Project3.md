@@ -674,3 +674,15 @@ divide the discrete features into four parts (@unlimitediw):
                                 correct+= 1
                         return correct / len(X)
 
+* Learning curve:
+    * svm
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/SV%2C.png)
+    * logistic regression(with perceptron)
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/SV%2C.png)
+
+* Performance Evaluation:
+    * 'rbf' kernel soft svm:
+    
+    * Logistic regression with Perceptron:
+    
+    * Multiple layer Perceptron(neuron network)
