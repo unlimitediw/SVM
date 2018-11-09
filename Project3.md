@@ -397,11 +397,21 @@ divide the discrete features into four parts (@unlimitediw):
     * part 1: More about feature preprocessing: For the calssification type feature, I want to use one hard coding to define the discrete features. However, in this project, more features is still a disaster so I can only a little bunch of data and some important features to train and test. Furthermore, for some features that have similarity I will aggregate it and simply flatten the classification data such as marital status into a series of boolean features such as Speparted[0,1], Never-married[0,1].
         * e.g
             
-              Xnames = ['age','education num','hours','capital gain','capital loss','fnlwgt','sex','married']
+              Xnames = ['age','education num','hours','capital gain','capital loss','fnlwgt','sex','Never married, Divorced']
               X = [33,5,40,0,0,132870,1,0]
     * part 2: I will also do the feature normalization with Standardization since the range of values of raw data varies widely such as capital gain. The range of all features should be normalized so that each feature contributes approximately proportionately to the final distance.
+        * Scaling code:
+            
+                mean = np.mean(Q[i])
+                std = np.std(Q[i])
+                Q[i] = (Q[i] - mean) / std
 
-
+    * part 3: Multifeature Linear Soft SVM performance
+        * It is really slow to train many features with linear soft svm since the kernel of it is X.T.dot(X) and it will take O(c * d ^ 2 * m ^ 2) to finish the model training, However to some kernel such as 'rbf', the time complexity will be only O(c * d * m ^ 2) which will be faster
+        * The accuracy in relation to C:
+            * ![](https://github.com/unlimitediw/SVM/blob/master/Image/Multifeature.png)
+            * There is only a little improvement(less than 1%) with the usage of multi features and it is due to my pool computer performance which can not affort the parameters optimization process.
+            * However, soft linear svm will cause too many error points in any way so it is reasonable.
 
 
 <a name="performance"></a>
