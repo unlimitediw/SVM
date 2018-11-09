@@ -422,7 +422,8 @@ divide the discrete features into four parts (@unlimitediw):
 <a name="performance"></a>
 ## Kernel SVM and Performance imporving
 * Performance Comparision for different kernel:
-    * Attention: '>=50k' is positive in my model.
+    * The test data size is 814, the training data is 3000
+    * '>=50k' is positive in my model.
     * Linear Kernel:
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearDecisionBoundary.png)
         * C value: 0.01
