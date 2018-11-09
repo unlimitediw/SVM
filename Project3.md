@@ -3,7 +3,7 @@
 1. [Project Description](#project)
 2. [Dataset Preprocessing and Interpretation](#preprocessing)
 3. [Linear Soft Margin SVM](#svm)
-4. [Performance](#performance)
+4. [Kernel SVM and Performance Imporving](#performance)
 
 
 <a name="project"></a>
@@ -420,7 +420,7 @@ divide the discrete features into four parts (@unlimitediw):
 
 
 <a name="performance"></a>
-## Kernel SVM and Performance imporving
+## Kernel SVM and Performance Imporving
 * Performance Comparision for different kernel:
     * The test data size is 814, the training data is 3000
     * '>=50k' is positive in my model.
