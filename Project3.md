@@ -383,6 +383,7 @@ divide the discrete features into four parts (@unlimitediw):
 * Change C and evaluate model:
     * Relationship between C and SVM performance:
         * SVM perfomance relationship with C value in linear svm model is really not obvious. Generally speaking, though, Larger C means the SVM model will be more strict and has less error point. However, the C value will only affect the performance in this model slightly.
+        * Generally speaking, the larger C value means that the model is more strict and will not allow more error points.
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/Crelationship.png)
         
     * decision boudary with smaller C 0.01:
@@ -408,14 +409,53 @@ divide the discrete features into four parts (@unlimitediw):
 
     * part 3: Multifeature Linear Soft SVM performance
         * It is really slow to train many features with linear soft svm since the kernel of it is X.T.dot(X) and it will take O(c * d ^ 2 * m ^ 2) to finish the model training, However to some kernel such as 'rbf', the time complexity will be only O(c * d * m ^ 2) which will be faster
+        * The way to find best C: I simply run a loop with increasing of C value and train and test model in each loop to find the best C value.
         * The accuracy in relation to C:
             * ![](https://github.com/unlimitediw/SVM/blob/master/Image/Multifeature.png)
             * There is only a little improvement(less than 1%) with the usage of multi features and it is due to my pool computer performance which can not affort the parameters optimization process.
             * However, soft linear svm will cause too many error points in any way so it is reasonable.
-        * The accuracy of prediction of test data is 0.778 finally with 1500 training data and 1500 testing data.
+        * The accuracy of prediction of test data is 77.8% finally with 1500 training data and 1500 testing data.
         * My optimal C value is 0.02 in this linear soft-margin model.
         
 
 
 <a name="performance"></a>
-## Performance
+## Kernel SVM and Performance imporving
+* Performance Comparision for different kernel:
+    * Linear Kernel:
+        ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearDecisionBoundary.png)
+        * True Positive: 
+        * FalsePositive:
+        * TrueNegative:
+        * FalseNegative:
+        
+        * Accuracy:
+        * Precision:
+        * Recall:
+        * F1-Score:
+        * Variance:
+        * (Sorry I can not understant what variance needed in this project So I used the variance of (TP,FP,TN,FN) at this place and will explain other variance to Grader if needed later)
+    * RBF Kernel:
+        ![](https://github.com/unlimitediw/SVM/blob/master/Image/DecisionBoundary.png)
+        * True Positive: 
+        * FalsePositive:
+        * TrueNegative:
+        * FalseNegative:
+        
+        * Accuracy:
+        * Precision:
+        * Recall:
+        * F1-Score:
+        * Variance:
+    * Polynomial Kernel
+        ![](https://github.com/unlimitediw/SVM/blob/master/Image/PolynomialBoundary.png)
+        * True Positive: 
+        * FalsePositive:
+        * TrueNegative:
+        * FalseNegative:
+        
+        * Accuracy:
+        * Precision:
+        * Recall:
+        * F1-Score:
+        * Variance:
