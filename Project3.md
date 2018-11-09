@@ -424,7 +424,7 @@ divide the discrete features into four parts (@unlimitediw):
 * Performance Comparision for different kernel:
     * Attention: '>=50k' is positive in my model.
     * Linear Kernel:
-        ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearDecisionBoundary.png)
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/LinearDecisionBoundary.png)
         * C value: 0.01
         * True Positive: 87
         * FalsePositive: 48
@@ -438,7 +438,7 @@ divide the discrete features into four parts (@unlimitediw):
         * Variance: 412924.5
         * (Sorry I can not understant what variance needed in this project So I used the variance of (TP,FP,TN,FN) at this place and will explain other variance to Grader if needed later)
     * RBF Kernel:
-        ![](https://github.com/unlimitediw/SVM/blob/master/Image/DecisionBoundary.png)
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/DecisionBoundary.png)
         * C value: 0.5
         * True Positive: 101
         * FalsePositive: 41
@@ -452,7 +452,7 @@ divide the discrete features into four parts (@unlimitediw):
         * Variance: 414478.5
         
     * Polynomial Kernel
-        ![](https://github.com/unlimitediw/SVM/blob/master/Image/PolynomialBoundary.png)
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/PolynomialBoundary.png)
         * C value: 0.000001
         * True Positive: 90
         * FalsePositive: 50
