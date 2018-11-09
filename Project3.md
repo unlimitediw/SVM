@@ -414,7 +414,7 @@ divide the discrete features into four parts (@unlimitediw):
             * ![](https://github.com/unlimitediw/SVM/blob/master/Image/Multifeature.png)
             * There is only a little improvement(less than 1%) with the usage of multi features and it is due to my pool computer performance which can not affort the parameters optimization process.
             * However, soft linear svm will cause too many error points in any way so it is reasonable.
-        * The accuracy of prediction of test data is 77.8% finally with 1500 training data and 1500 testing data.
+        * The final accuracy of prediction of test data is 77.8% finally with 1500 training data and 1500 testing data.
         * My optimal C value is 0.02 in this linear soft-margin model.
         
 
