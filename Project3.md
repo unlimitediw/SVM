@@ -463,7 +463,7 @@ divide the discrete features into four parts (@unlimitediw):
         * TrueNegative: 554
         * FalseNegative: 118
         
-        * Accuracy: 0.81
+        * Accuracy: 0.79
         * Precision: 0.71
         * Recall: 0.46
         * F1-Score: 0.56
