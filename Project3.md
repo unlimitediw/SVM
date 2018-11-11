@@ -703,13 +703,18 @@ divide the discrete features into four parts (@unlimitediw):
     * 'rbf' kernel soft svm:
       * Explain: The performance of svm is not bad comparing to the perceptron since it project the low dimensional features into high dimensions and use soft svm which allow some acceptable error exist in the margin and keep the marigin larger by SMO algorithm.
       * Learning curve evaluation: small sample training data will let the model overfitting and perform well in the training data set but bad at test or validation set. As the training data incresing, the error of validation/test drop and the training accuracy decrease which will help us to avoid overfitting.
+      
     * Logistic regression with Perceptron:
-      * Explain: although logistic regression model can handle classification problem, it can only solve the linear separable data. To this complicated salary prediction data, it works very bad but it can be improved by adding multilayer which turn this problem separable by neuron network.
-      * Learning curve: There are some high confidence with small input data. But it is just a lucky treating even not an overfitting as the basic accuracy should be 0.751 in any way
+      * Explain: although logistic regression model can handle classification problem, it can only solve the linear separable data. To this complicated salary prediction data, it works very bad but it can be improved by adding multilayer which turn this problem separable by neuron network. The accuracy is nearly no improvement with only 76% and 75.1% of adults are "<50k" original.
     
     * Multiple layer Perceptron(neural network)
-      * In my 2 Layers perceptron nural network. The accuracy boost from 76% as a simple perceptron to 83% which perform pretty good in this non linear separable model.
+      * In my 2 Layers perceptron nural network. The accuracy boost from 76% as a simple perceptron to 81% which perform pretty good in this non linear separable model.
       * Explain: MLP can solve linear non separable problem very well. Except for the input nodes, each node is a neuron that uses a nonlinear activation function which will turn it becomes a strong non linear tool. MLP allows approximate solutions for extremely complex problems like fitness approximation and this adult salary problem.
+    * I used 10-cross-validation and some independent test set to evaluated my MLP model.
+
+* Why MLP is good for this problem?
+  * As you can see from the learning curve. The difference between training error and test error is always small which means that the model is not overfitting while the accuracy is maintain at a level of 81%. 
+  * At the same time, although the accuracy performance is similiar to the svm model with 'rbf' kernel. There is a high possibility to improve the MLP model with more hidden layers and broading the hidden layer.
 
 * PS: It is my SMO alogrithm implementation which is also showed previously. 
 
