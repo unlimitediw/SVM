@@ -712,7 +712,7 @@ divide the discrete features into four parts (@unlimitediw):
       * Explain: MLP can solve linear non separable problem very well. Except for the input nodes, each node is a neuron that uses a nonlinear activation function which will turn it becomes a strong non linear tool. MLP allows approximate solutions for extremely complex problems like fitness approximation and this adult salary problem.
     * I used 10-cross-validation and some independent test set to evaluated my MLP model.
 
-* Why MLP is good for this problem?
+* More about MLP advantages:
   * As you can see from the learning curve. The difference between training error and test error is always small which means that the model is not overfitting while the accuracy is maintain at a level of 81%. 
   * At the same time, although the accuracy performance is similiar to the svm model with 'rbf' kernel. There is a high possibility to improve the MLP model with more hidden layers and broading the hidden layer.
 
