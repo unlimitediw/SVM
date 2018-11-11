@@ -1,3 +1,4 @@
+<a name="back"></a>
 # Use SVM to solve Adult Census problem
 
 1. [Project Description](#project)
@@ -8,6 +9,7 @@
 
 <a name="project"></a>
 ## Project Description
+[back to menu](#back)
 
 * In this exercise, I implement my own linear soft SVM with rbf, linear and polynomial kernel to solve the Adult Census Income problem. I first do the data preprocessing to abandon the rows containing '?' and select the features with highest priority as model input features. After that, I design and train my linear soft SVM model with different kernels and validate it by 10-fold-cross validation while visualize it like drawing boundary at the same time. In the model training process I also compare the performance of my model with different kernels, different hyperparameters such as 'C', 'sigma', 'tolerance' and so on. At the end. I also add the bagging methods to improve my svm model and evaluate a boosting methods to compare with svm to compare with the svm model. I finally using learning curves to show the performance for different methods.
 
@@ -15,6 +17,7 @@
 
 <a name="preprocessing"></a>
 ## Dataset preprocessing and interpretation
+[back to menu](#back)
 There are three parts of preprocessing: data purify, dealing with discrete features and feature selection
 * Data purify: removing the rows with data containing '?'
 
@@ -32,28 +35,28 @@ There are three parts of preprocessing: data purify, dealing with discrete featu
 divide the discrete features into four parts (@unlimitediw):
   1. Correlated Feature: the feature which has some correlation in it's values. For instance, to the feature 'education', it is obviously that Preschool < Doctorate and so on.              
       * treatment: to the well-distributed integer clssificated feature, we can diretly used it as a input feature with normalization while to the high correlated data such as the education, we can convert it to well-distributed integer classified feature 'education num' in a proper weighted way.
-      * inside classification:
-         * age
-         * education
-         * education num
-         * hours.per.week
+      * types:
+         * age: used directly as continous numeric variable e.g 19
+         * education: changed to education num and used directly e.g 9(which is HS-grad) 
+         * education num: used directly as continous numeric variable e.g 9
+         * hours.per.week: used directly as continous numeric variable e.g 40
   2. Independent Feature: the feature which has no relationship in it's values such as the native country
       * treatment: 
-        * It is possible to use some techinque of PCA and One hard coding to evaluate these classification features or just turn it to boolean data type.
+        * It is possible to use some techinque of PCA and One hot coding to evaluate these classification features or just turn it to boolean data type.
         * Although we can not find the correlation inside of it directly, we can first do the clustering depends on the class relation with label. Forexample: to the occupation, we calculate the percentage of '>50k' of each class of occupation and rank it. After that, create a new boolean feature that takes the left half as strong occupation and the right half as the weak occupation.
-      * inside classification:
-         * native country
-         * race
-         * occupation
+      * types:
+         * native country: used by one hot coding e.g  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] as a vector variable(which is 'Yugoslavia').
+         * race: same as previous
+         * occupation: same as previous
   3. Boolean Feature: these kind of data is the most basic one, we don't need to do any treatment with it.
       * treatment: It is the most basic feature and we can just set the true as 1 and false as -1 and take it as input feature.
-      * inside classification:
-         * sex
+      * types:
+         * sex: domain[-1,1]. 1 means male, -1 means female and used as numeric variable directly.
   4. Compound Feature: some feature is very hard to find the relation inside of it. May be some parts of it are correlated but other are not and the classification of this feature is not well-distributed.
       * treatment: Someway same as the independent features. However, there may some different since it still has some correlation inside some of it's feature classes and we may deploy the data unequally with more heuristic instruction. For instance, we can rank the feature classes based on percentage of '>=50k' and average the feature classes with transistion statUs such as 'Married-spouse-absent' and 'Married-civ-spouse' because it is too close.
-      * inside classification:
-         * marital status
-         * workclass
+      * types:
+         * marital status: replace each class in the feature by the value of (proportion of #">50k"/#"<=50k" in this class) and use it as numeric value directly.
+         * workclass: same as marital status
 
 * Spilt the dataset for stratified 10-fold-cross validation.
     * coding:
@@ -175,6 +178,8 @@ divide the discrete features into four parts (@unlimitediw):
             
 <a name="svm"></a>
 ## Linear Soft Margin SVM and Kernel SVM
+[back to menu](#back)
+* p.s I implement my own solver. Please review the coding below. If you want to run and check it please visit my git and the source code is in the MLGWU folder
 * Before showing my validation result and decision boundary I want to display my handwork coding for my svm training model, linear svm trainer, kernel svm trainer with some kernel functions and smo algorithm inside.
     * Train SVM Model code including linear soft svm, kernel svm with 'rbf' and 'polynomial:
 
@@ -389,6 +394,7 @@ divide the discrete features into four parts (@unlimitediw):
 * Change C and evaluate model:
     * Relationship between C and SVM performance:
         * SVM perfomance relationship with C value in linear svm model is really not obvious. Generally speaking, though, Larger C means the SVM model will be more strict and has less error point. However, the C value will only affect the performance in this model slightly.
+        * To this kaggle data source, the age and education num features in data is not highly related to the C value in the linear svm model. However, in the svm model with 'rbf' kernel and 'polynomial' kernel, it affect the performance seriously. In 'rbf' kernel, higher C will make the boundary more strict and special which will generate many small boundary for particific area. In polynomial model, higher or lower C will even make the boudary out of the data area.
         * Generally speaking, the larger C value means that the model is more strict and will not allow more error points.
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/Crelationship.png)
         
@@ -401,17 +407,20 @@ divide the discrete features into four parts (@unlimitediw):
     
 
 * Train SVM using all features:
-    * part 1: More about feature preprocessing: For the calssification type feature, I want to use one hard coding to define the discrete features. However, in this project, more features is still a disaster so I can only a little bunch of data and some important features to train and test. Furthermore, for some features that have similarity I will aggregate it and simply flatten the classification data such as marital status into a series of boolean features such as Speparted[0,1], Never-married[0,1].
+    * part 1: 
+      * More about feature preprocessing: For the calssification type feature, I want to use one hard coding to define the discrete features. However, in this project, more features is still a disaster so I can only a little bunch of data and some important features to train and test. Furthermore, for some features that have similarity I will aggregate it and simply flatten the classification data such as marital status into a series of boolean features such as Speparted[0,1], Never-married[0,1].
+      * For some continuous feature such as fnlgwt and capital, standardization normalization is especially important or the other features affect will be neglected.
         * e.g
             
               Xnames = ['age','education num','hours','capital gain','capital loss','fnlwgt','sex','Never married, Divorced']
-              X = [33,5,40,0,0,132870,1,0]
+              X = [33,5,40,0,0,0.31,1,0]
     * part 2: I will also do the feature normalization with Standardization since the range of values of raw data varies widely such as capital gain. The range of all features should be normalized so that each feature contributes approximately proportionately to the final distance.
         * Scaling code:
             
                 mean = np.mean(Q[i])
                 std = np.std(Q[i])
                 Q[i] = (Q[i] - mean) / std
+        * p.s it works very well. In my multi feature SVM model and MLP model, the accuracy boost 4 to 6% with this standardization.
 
     * part 3: Multifeature Linear Soft SVM performance
         * It is really slow to train many features with linear soft svm since the kernel of it is X.T.dot(X) and it will take O(c * d ^ 2 * m ^ 2) to finish the model training, However to some kernel such as 'rbf', the time complexity will be only O(c * d * m ^ 2) which will be faster
@@ -427,6 +436,8 @@ divide the discrete features into four parts (@unlimitediw):
 
 <a name="performance"></a>
 ## Kernel SVM and Performance Imporving
+[back to menu](#back)
+* p.s Despide of the SMO, I also implemented my own neural network model in this section
 * Performance Comparision for different kernel:
     * The test data size is 814, the training data is 3000
     * '>=50k' is positive in my model.
@@ -442,7 +453,7 @@ divide the discrete features into four parts (@unlimitediw):
         * Precision: 0.64
         * Recall: 0.40
         * F1-Score: 0.49 
-        * Variance: 412924.5
+        * Variance: 0.00402
         * (Sorry I can not understant what variance needed in this project So I used the variance of (TP,FP,TN,FN) at this place and will explain other variance to Grader if needed later)
     * RBF Kernel:
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/DecisionBoundary.png)
@@ -456,7 +467,7 @@ divide the discrete features into four parts (@unlimitediw):
         * Precision: 0.71
         * Recall: 0.46
         * F1-Score: 0.56
-        * Variance: 414478.5
+        * Variance: 0.00251
         
     * Polynomial Kernel
         * ![](https://github.com/unlimitediw/SVM/blob/master/Image/PolynomialBoundary.png)
@@ -470,7 +481,7 @@ divide the discrete features into four parts (@unlimitediw):
         * Precision: 0.64
         * Recall: 0.41
         * F1-Score: 0.50
-        * Variance: 412364.5
+        * Variance: 0.00318
 
 * Using Multi Layer Perceptron to get higher Performance.
     * feature preprocessing: 
@@ -489,190 +500,195 @@ divide the discrete features into four parts (@unlimitediw):
                 output_layer_size = 1  # salary
         * Method in MLP:
         
-                def genRandThetas():
-                    epsilon = 0.12
-                    # attention, theta is at left
-                    theta1_shape = (hidden_layer_size, input_layer_size + 1)
-                    theta2_shape = (output_layer_size, hidden_layer_size + 1)
-                    return np.random.rand(*theta1_shape) * 2 * epsilon - epsilon, np.random.rand(*theta2_shape) * 2 * epsilon - epsilon
+              Y_0 = Y == "<=50K"
+              Y_1 = Y == ">50K"
+              Y[Y_0] = 0
+              Y[Y_1] = 1
 
-                # if we need to use fmin_cg, we should use flattenParams and reshapeParams
-                def flattenParams(Thetas):
-                    flattened_list = [mytheta.flatten() for mytheta in Thetas]
-                    combined = list(itertools.chain.from_iterable(flattened_list))
-                    assert len(combined) == (input_layer_size+1)*hidden_layer_size + \
-                                            (hidden_layer_size+1)*output_layer_size
-                    return np.array(combined).reshape((len(combined), 1))
+              data = df.values
 
 
-                def reshapeParams(flattened_list):
-                    theta1 = flattened_list[:(input_layer_size + 1) * hidden_layer_size].reshape(
-                        (hidden_layer_size, input_layer_size + 1))
-                    theta2 = flattened_list[(input_layer_size + 1) * hidden_layer_size:].reshape(
-                        (output_layer_size, hidden_layer_size + 1))
+              from sklearn.model_selection import train_test_split
 
-                    return [theta1,theta2]
+              X = X[[0,2,4,10,11,12], :]
+              X = X.T
+              Y = Y.astype('int')
+              X = np.float64(X)
 
-                def flattenX(X):
-                    train_size = len(X)
-                    return np.array(X.flatten()).reshape((train_size*(input_layer_size+1),1))
+              def standarize(X):
+                  X = X.T
+                  for i in range(1,len(X)):
+                      mean = np.mean(X[i])
+                      std = np.std(X[i])
+                      X[i] = (X[i] - mean) / std
+                  X = X.T
+              standarize(X)
+              X, X_show, Y, Y_show = train_test_split(X, Y, test_size=0.8, random_state=15)
+              pos = np.asarray([X_show[t] for t in range(X_show.shape[0]) if Y_show[t] == 1])
+              neg = np.asarray([X_show[t] for t in range(X_show.shape[0]) if Y_show[t] == -1])
 
-                def reshapeX(X,preSize):
-                    return np.array(X).reshape((preSize,input_layer_size+1))
+              input_layer_size = 6  # plus 1 for X0
+              hidden_layer_size = 3  # plus 1 for X0
+              output_layer_size = 1  # digits
 
+              # First step: insert 1 to X
+              # Second step: construct a 784,25 shape random set matrix
+              # Third step: construct a 26 * 10 shape random set matrix
+              # Fourth step: do the forward propagation
+              # calculate the lost at the end and do backward propagation
 
-                # Feedforward
-                def propagateForward(X, Thetas):
-                    # Thetas = [theta1, theta2]
-                    features = X
-                    z_memo = []
-                    for i in range(len(Thetas)):
-                        theta = Thetas[i]
-                        z = theta.dot(features).reshape((theta.shape[0], 1))
-                        # activation should be 0-0.5, 0.5-1
-                        a = expit(z)
-                        z_memo.append((z, a))
-                        if i == len(Thetas) - 1:
-                            return np.array(z_memo)
-                        a = np.insert(a, 0, 1)  # add X0
-                        features = a
+              X = np.insert(X, 0, 1, axis=1)
 
+              X, X_test, Y, Y_test = train_test_split(X, Y, test_size=0.1, random_state=1)
 
-                def computeCost(Thetas, X, Y, my_lambda=0.):
-                    Thetas = reshapeParams(Thetas)
-                    X = reshapeX(X,len(X))
-                    total_cost = 0.
-                    train_size = len(X)
-                    try:
-                        for i in range(train_size):
-                            cur_X = X[i]
-                            cur_Y = Y[i]
-                            hyper = propagateForward(cur_X.T, Thetas)[-1][1]
-                            temp_Y = np.zeros((10, 1))
-                            temp_Y[cur_Y - 1] = 1
-                            cost = - temp_Y.T.dot(np.log(hyper)) - (1 - temp_Y.T).dot(np.log(1 - hyper))
-                            total_cost += cost
-                    except:
-                        print("train_size should be smaller than X size")
-                    total_cost = float(total_cost) / train_size
+              m = len(X)
+              # theta initialization
+              def genRandThetas():
+                  epsilon = 0.12
+                  # attention, theta is at left
+                  theta1_shape = (hidden_layer_size, input_layer_size + 1)
+                  theta2_shape = (output_layer_size, hidden_layer_size + 1)
+                  return np.random.rand(*theta1_shape) * 2 * epsilon - epsilon, np.random.rand(*theta2_shape) * 2 * epsilon - epsilon
 
-                    # avoid overfitting
-                    total_reg = 0.
-                    for theta in Thetas:
-                        total_reg += np.sum(theta*theta)
-                    total_reg *= float(my_lambda) / (2 * train_size)
-                    return total_cost + total_reg
+              # if we need to use fmin_cg, we should use flattenParams and reshapeParams
+              def flattenParams(Thetas):
+                  flattened_list = [mytheta.flatten() for mytheta in Thetas]
+                  combined = list(itertools.chain.from_iterable(flattened_list))
+                  assert len(combined) == (input_layer_size+1)*hidden_layer_size + \
+                                          (hidden_layer_size+1)*output_layer_size
+                  return np.array(combined).reshape((len(combined), 1))
 
 
-                # Backpropagation part
-                def sigmoidGradient(z):
-                    # expit = 1/(1+e^z)
-                    # dummy is the activation layer
-                    dummy = expit(z)
-                    return dummy * (1 - dummy)
+              def reshapeParams(flattened_list):
+                  theta1 = flattened_list[:(input_layer_size + 1) * hidden_layer_size].reshape(
+                      (hidden_layer_size, input_layer_size + 1))
+                  theta2 = flattened_list[(input_layer_size + 1) * hidden_layer_size:].reshape(
+                      (output_layer_size, hidden_layer_size + 1))
+
+                  return [theta1,theta2]
+
+              def flattenX(X):
+                  train_size = len(X)
+                  return np.array(X.flatten()).reshape((train_size*(input_layer_size+1),1))
+
+              def reshapeX(X,preSize):
+                  return np.array(X).reshape((preSize,input_layer_size+1))
 
 
-                def backPropagate(Thetas, X, Y, my_lambda=0.):
-                    Thetas = reshapeParams(Thetas) # ccc
-                    X = reshapeX(X,len(X))
-                    train_size = len(X)
-                    Delta1 = np.zeros((hidden_layer_size, input_layer_size + 1))
-                    Delta2 = np.zeros((output_layer_size, hidden_layer_size + 1))
-                    for i in range(train_size):
-                        cur_X = X[i]
-                        a1 = cur_X.reshape((input_layer_size + 1, 1))
-                        temp = propagateForward(cur_X, Thetas)
-                        z2 = temp[0][0]
-                        a2 = temp[0][1]
-                        z3 = temp[1][0]
-                        a3 = temp[1][1]
-                        temp_Y = np.zeros((10, 1))
-                        temp_Y[Y[i] - 1] = 1
-                        # delta is just a diff, Delta is gradient
-                        delta3 = a3 - temp_Y
-                        # bp should remove first X0
-                        # Thetas[1].T[1:,:].dot(delta3) is the theta.dot(pre_error)
-                        delta2 = Thetas[1].T[1:, :].dot(delta3) * sigmoidGradient(z2)
-                        a2 = np.insert(a2, 0, 1, axis=0)
-                        # Delta = (antriTri + regular)/size
-                        # delat.dot(activation) + pre = new antiTri
-                        print(delta3.shape,a2.T.shape,Delta2.shape)
-                        Delta1 += delta2.dot(a1.T)
-                        Delta2 += delta3.dot(a2.T)
-                        # Finally Delta = derivative of theta for each layer
+              # Feedforward
+              def propagateForward(X, Thetas):
+                  # Thetas = [theta1, theta2]
+                  features = X
+                  z_memo = []
+                  for i in range(len(Thetas)):
+                      theta = Thetas[i]
+                      z = theta.dot(features).reshape((theta.shape[0], 1))
+                      # activation should be 0-0.5, 0.5-1
+                      a = expit(z)
+                      z_memo.append((z, a))
+                      if i == len(Thetas) - 1:
+                          return np.array(z_memo)
+                      a = np.insert(a, 0, 1)  # add X0
+                      features = a
 
-                    D1 = Delta1 / train_size
-                    D2 = Delta2 / train_size
+              def computeCost(Thetas, X, Y, my_lambda=0.):
+                  Thetas = reshapeParams(Thetas)
+                  X = reshapeX(X,m)
+                  total_cost = 0.
+                  train_size = m
+                  try:
+                      for i in range(train_size):
+                          cur_X = X[i]
+                          cur_Y = Y[i]
+                          hyper = propagateForward(cur_X.T, Thetas)[-1][1]
+                          cost = - (cur_Y * np.log(hyper)) - (1 - cur_Y)*(np.log(1 - hyper))
+                          total_cost += cost
+                  except:
+                      print("train_size should be smaller than X size")
+                  total_cost = float(total_cost) / train_size
 
-                    # Regularization:
-                    D1[:, 1:] += (my_lambda / train_size) * Thetas[0][:, 1:]
-                    D2[:, 1:] += (my_lambda / train_size) * Thetas[1][:, 1:]
-
-                    return flattenParams([D1, D2]).flatten()
-
-
-
-                def trainNN2(X, Y, my_lambda=0.):
-                    theta1, theta2 = genRandThetas()
-                    f_theta = flattenParams([theta1,theta2])
-                    result = scipy.optimize.fmin_cg(computeCost, x0=f_theta, fprime=backPropagate, args=(flattenX(X), Y, my_lambda),
-                                                    maxiter=50, disp=True, full_output=True)
-                    return reshapeParams(result[0])
+                  # avoid overfitting
+                  total_reg = 0.
+                  for theta in Thetas:
+                      total_reg += np.sum(theta*theta)
+                  total_reg *= float(my_lambda) / (2 * train_size)
+                  return total_cost + total_reg
 
 
-                # argmax for softmax
-                def predictNN(X, Thetas):
-                    classes = list(range(1, 10)) + [10]
-                    output = propagateForward(X, Thetas)
-                    return sigmoidGradient(output[-1][1][0])
+              # Backpropagation part
+              def sigmoidGradient(z):
+                  # expit = 1/(1+e^z)
+                  # dummy is the activation layer
+                  dummy = expit(z)
+                  return dummy * (1 - dummy)
 
-                def computeAccuracy(Thetas, X, Y):
-                    correct = 0
-                    total = X.shape[0]
-                    for i in range(total):
-                        if int(predictNN(X[i], Thetas) == Y[i]):
-                            correct += 1
-                    return "%0.1f%%" % (100 * correct / total)
 
-        * coding part B(perceptron):
-            * why perceptron: sorry I have no time to train and adjust the layer very well in the previous model, since I just go through 2 midterms and 2 large projects in last week and this week. So I just try my best to use the more simple perceptron model to draw the learning curve. However, I will still implement why I want to use MLP in this salary problem.
+              def backPropagate(Thetas, X, Y, my_lambda=0.):
+                  Thetas = reshapeParams(Thetas) # ccc
+                  X = reshapeX(X,m)
+                  train_size = m
+                  Delta1 = np.zeros((hidden_layer_size, input_layer_size + 1))
+                  Delta2 = np.zeros((output_layer_size, hidden_layer_size + 1))
+                  for i in range(train_size):
+                      cur_X = X[i]
+                      cur_Y = Y[i]
+                      a1 = cur_X.reshape((input_layer_size + 1, 1))
+                      temp = propagateForward(cur_X, Thetas)
+                      z2 = temp[0][0]
+                      a2 = temp[0][1]
+                      z3 = temp[1][0]
+                      a3 = temp[1][1]
+                      # delta is just a diff, Delta is gradient
+                      delta3 = a3 - cur_Y
+                      # bp should remove first X0
+                      # Thetas[1].T[1:,:].dot(delta3) is the theta.dot(pre_error)
+                      delta2 = Thetas[1].T[1:, :].dot(delta3) * sigmoidGradient(z2)
+                      a2 = np.insert(a2, 0, 1, axis=0)
+                      # Delta = (antriTri + regular)/size
+                      # delat.dot(activation) + pre = new antiTri
+                      # print(delta3.shape,a2.T.shape,Delta2.shape)
+                      Delta1 += delta2.dot(a1.T)
+                      Delta2 += delta3.dot(a2.T)
+                      # Finally Delta = derivative of theta for each layer
 
-                    def sigmoid(val):
-                        return 1/(1+math.exp(-val))
+                  D1 = Delta1 / train_size
+                  D2 = Delta2 / train_size
 
-                    def standarize(X):
-                        X = X.T
-                        for i in range(1,len(X)):
-                            mean = np.mean(X[i])
-                            std = np.std(X[i])
-                            X[i] = (X[i] - mean) / std
-                        X = X.T
-                    def train2(Thetas, X, Y, lr, loops):
-                        X_length = len(X)
-                        for l in range(loops):
-                            for i in range(X_length):
-                                predict = Thetas.dot(X[i].T)
-                                # rint(predict)
-                                err = Y[i] - predict
-                                # print(err)
-                                # print(err)
-                                print("!!!",err,X[i].shape)
-                                Thetas = Thetas + lr * X[i] * err
+                  # Regularization:
+                  D1[:, 1:] += (my_lambda / train_size) * Thetas[0][:, 1:]
+                  D2[:, 1:] += (my_lambda / train_size) * Thetas[1][:, 1:]
 
-                    def validation2(Thetas, X, Y):
-                        correct = 0
-                        for i in range(len(X)):
-                            predict = Thetas.dot(X[i].T)
-                            predict = sigmoid(predict)
-                            predict = 1 if predict > 0.5 else 0
-                            '''
-                            # accurate validation
-                            if abs(predict - label_dic[Y[i][0]]) < 0.5:
-                                correct += 1
-                            '''
-                            if predict != Y[i]:
-                                correct+= 1
-                        return correct / len(X)
+                  return flattenParams([D1, D2]).flatten()
+
+
+
+              def trainNN2(X, Y, my_lambda=0.):
+                  theta1, theta2 = genRandThetas()
+                  f_theta = flattenParams([theta1,theta2])
+                  result = scipy.optimize.fmin_cg(computeCost, x0=f_theta, fprime=backPropagate, args=(flattenX(X), Y, my_lambda),
+                                                  maxiter=30, disp=True, full_output=True)
+                  return reshapeParams(result[0])
+
+
+              # argmax for softmax
+              def predictNN(X, Thetas):
+                  output = propagateForward(X, Thetas)[-1][1]
+                  return 1 if output > 0.5 else 0
+
+
+              def computeAccuracy(Thetas, X, Y):
+                  correct = 0
+                  total = X.shape[0]
+                  print(X.shape)
+                  for i in range(total):
+                      hyper = predictNN(X[i], Thetas)
+                      print(hyper,Y[i])
+                      if hyper == Y[i]:
+                          correct += 1
+                  return "%0.1f%%" % (100 * correct / total)
+              # Predict validating and testing
+              learn = trainNN2(X,Y)
+              print(computeAccuracy(learn,X_test,Y_test))
 
 * Learning curve:
     * svm
@@ -688,10 +704,11 @@ divide the discrete features into four parts (@unlimitediw):
       * Explain: although logistic regression model can handle classification problem, it can only solve the linear separable data. To this complicated salary prediction data, it works very bad but it can be improved by adding multilayer which turn this problem separable by neuron network.
       * Learning curve: There are some high confidence with small input data. But it is just a lucky treating even not an overfitting as the basic accuracy should be 0.751 in any way
     
-    * Multiple layer Perceptron(neuron network)
+    * Multiple layer Perceptron(neural network)
+      * In my 2 Layers perceptron nural network. The accuracy boost from 76% as a simple perceptron to 83% which perform pretty good in this non linear separable model.
       * Explain: MLP can solve linear non separable problem very well. Except for the input nodes, each node is a neuron that uses a nonlinear activation function which will turn it becomes a strong non linear tool. MLP allows approximate solutions for extremely complex problems like fitness approximation and this adult salary problem.
 
-* PS: It is my own quadratic problem solvers which is also showed previously. 
+* PS: It is my SMO alogrithm implementation which is also showed previously. 
 
             class SVM_HAND(object):
                 def __init__(self, C, XSample, YSample, tolerance = .1, sigma = 3, kernel = 'rbf'):
@@ -847,4 +864,6 @@ divide the discrete features into four parts (@unlimitediw):
                             passes += 1
                         else:
                             passes = 0
+
+
 
