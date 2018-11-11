@@ -9,15 +9,15 @@
 
 <a name="project"></a>
 ## Project Description
-[back to menu](#back)
+
 
 * In this exercise, I implement my own linear soft SVM with rbf, linear and polynomial kernel to solve the Adult Census Income problem. I first do the data preprocessing to abandon the rows containing '?' and select the features with highest priority as model input features. After that, I design and train my linear soft SVM model with different kernels and validate it by 10-fold-cross validation while visualize it like drawing boundary at the same time. In the model training process I also compare the performance of my model with different kernels, different hyperparameters such as 'C', 'sigma', 'tolerance' and so on. At the end. I also add the bagging methods to improve my svm model and evaluate a boosting methods to compare with svm to compare with the svm model. I finally using learning curves to show the performance for different methods.
 
 * '>= 50k' is the same meaning as '>50k' in my project.
-
+[back to menu](#back)
 <a name="preprocessing"></a>
 ## Dataset preprocessing and interpretation
-[back to menu](#back)
+
 There are three parts of preprocessing: data purify, dealing with discrete features and feature selection
 * Data purify: removing the rows with data containing '?'
 
@@ -175,10 +175,10 @@ divide the discrete features into four parts (@unlimitediw):
             * Secondly, I do not selection the discrete feature 'relationship' because as I metion previously, there is not too much correlation inside of the classes of the feature and is not appropriate to SVM model.
             * Finally, the two features age and educationNum with entropy gain of 0.0975 and 0.0934 repspectively are the highest information gain features after removing the continuous features of 'fnlwgt', 'captial gain' and no correlated feature 'relationship' and 'marital status'
                 
-            
+[back to menu](#back)
 <a name="svm"></a>
 ## Linear Soft Margin SVM and Kernel SVM
-[back to menu](#back)
+
 * p.s I implement my own solver. Please review the coding below. If you want to run and check it please visit my git and the source code is in the MLGWU folder
 * Before showing my validation result and decision boundary I want to display my handwork coding for my svm training model, linear svm trainer, kernel svm trainer with some kernel functions and smo algorithm inside.
     * Train SVM Model code including linear soft svm, kernel svm with 'rbf' and 'polynomial:
@@ -433,10 +433,10 @@ divide the discrete features into four parts (@unlimitediw):
         * My optimal C value is 0.02 in this linear soft-margin model.
         
 
-
+[back to menu](#back)
 <a name="performance"></a>
 ## Kernel SVM and Performance Imporving
-[back to menu](#back)
+
 * p.s Despide of the SMO, I also implemented my own neural network model in this section
 * Performance Comparision for different kernel:
     * The test data size is 814, the training data is 3000
@@ -865,5 +865,5 @@ divide the discrete features into four parts (@unlimitediw):
                         else:
                             passes = 0
 
-
+[back to menu](#back)
 
