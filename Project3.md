@@ -466,7 +466,7 @@ divide the discrete features into four parts (@unlimitediw):
         * TrueNegative: 554
         * FalseNegative: 118
         
-        * Accuracy: 0.79
+        * Accuracy: 0.81
         * Precision: 0.71
         * Recall: 0.46
         * F1-Score: 0.56
@@ -695,9 +695,9 @@ divide the discrete features into four parts (@unlimitediw):
 
 * Learning curve:
     * svm with rbf
-        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/rbfLearningCurve.png)
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/RBFLearnCurve.png)
     * 2 layers neural network
-        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/MLPLearningCurve.png)
+        * ![](https://github.com/unlimitediw/SVM/blob/master/Image/MLPLearnCurve.png)
 
 * Performance Evaluation:
     * 'rbf' kernel soft svm:
